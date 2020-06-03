@@ -1,0 +1,10 @@
+torch_data/MNIST/processed/test.pt
+torch_data/MNIST/processed/training.pt
+torch_data/MNIST/raw/t10k-images-idx3-ubyte
+torch_data/MNIST/raw/t10k-images-idx3-ubyte.gz
+torch_data/MNIST/raw/t10k-labels-idx1-ubyte
+torch_data/MNIST/raw/t10k-labels-idx1-ubyte.gz
+torch_data/MNIST/raw/train-images-idx3-ubyte
+torch_data/MNIST/raw/train-images-idx3-ubyte.gz
+torch_data/MNIST/raw/train-labels-idx1-ubyte
+torch_data/MNIST/raw/train-labels-idx1-ubyte.gz

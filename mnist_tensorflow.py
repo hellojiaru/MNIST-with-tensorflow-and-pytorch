@@ -45,25 +45,24 @@ def custom_train():
     for epoch in range(5):
         #训练步骤
         acc = []
-        # metric.reset_states()
+        metric.reset_states()
         for episode in range(episodes):
+            #加载各批次的数据
             start = episode*batch_size
             end = (episode+1)*batch_size
             data = x[start:end]
             labels = y[start:end]
+            #使用tape将要求导的计算步骤包起来，tf就可以实现自动求导了
             with tf.GradientTape() as tape:
-                preds = model(data, training=True)
-                loss = loss_fn(labels,preds)
-            grads = tape.gradient(loss,model.trainable_variables)
-            optimizer.apply_gradients(zip(grads,model.trainable_variables))
+                preds = model(data, training=True)  #数据经过模型的各个层得到预测结果，即前向传播
+                loss = loss_fn(labels,preds)    #将输出与实际的标签对比，即使用损失函数计算损失值
+            grads = tape.gradient(loss,model.trainable_variables)   #tf将上述过程对损失值求导（为了让损失值尽可能小，即预测尽可能接近目标）
+            optimizer.apply_gradients(zip(grads,model.trainable_variables)) #将求导结果应用到模型的参数上，即反向传播
 
-            acc.append(metric(labels,preds).numpy())    #使用keras自带的metric模型执行结果不用做argmax！
-            
-            # equals = tf.metrics.sparse_categorical_accuracy(np.expand_dims(labels,1),np.expand_dims(preds,1)).numpy()
-            # acc = np.mean(equals)            
+            acc.append(metric(labels,preds).numpy())    #计算每次的准确率，并保存，后续取均值       
         print('epoch',epoch,'acc',np.average(acc))
 
-        #验证步骤
+        #验证步骤，与上面类似，验证不需要改变模型，所以不用求导不用反向传播
         acc = []
         metric.reset_states()
         for val_episode in range(val_episodes):
