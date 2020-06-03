@@ -1,2 +1,3 @@
 # MNIST-with-tensorflow-and-pytorch
-深度学习最入门Demo，使用mnist数据集，分别有tensorflow2和pytorch版本。与网上其他较为复杂的教程不同，我用了我认为的最简单的方式实现
+分别有tf.keras最简化的实现、tf2使用继承建模并自定义训练过程的实现、pytorch的简单实现。
+
