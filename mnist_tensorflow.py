@@ -56,7 +56,7 @@ def custom_train():
             with tf.GradientTape() as tape:
                 preds = model(data, training=True)  #数据经过模型的各个层得到预测结果，即前向传播
                 loss = loss_fn(labels,preds)    #将输出与实际的标签对比，即使用损失函数计算损失值
-            grads = tape.gradient(loss,model.trainable_variables)   #tf将上述过程对损失值求导（为了让损失值尽可能小，即预测尽可能接近目标）
+            grads = tape.gradient(loss,model.trainable_variables)   #tf将上述过程对损失函数求导（为了让损失值尽可能小，即预测尽可能接近目标）
             optimizer.apply_gradients(zip(grads,model.trainable_variables)) #将求导结果应用到模型的参数上，即反向传播
 
             acc.append(metric(labels,preds).numpy())    #计算每次的准确率，并保存，后续取均值       
